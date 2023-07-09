@@ -55,6 +55,41 @@
       color: #ff0000;
       margin-top: 5px;
     }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+    }
+
+    .close {
+      color: #888;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -76,20 +111,29 @@
     </form>
 
     <h2>Cadastro</h2>
-    <form id="register-form" onsubmit="register(event)">
-      <div class="form-group">
-        <label for="new-username">Novo Usuário:</label>
-        <input type="text" id="new-username" required>
-      </div>
-      <div class="form-group">
-        <label for="new-password">Nova Senha:</label>
-        <input type="password" id="new-password" required>
-      </div>
-      <div class="form-group">
-        <button type="submit">Cadastrar</button>
-      </div>
-      <div class="success-message" id="success-message"></div>
-    </form>
+    <button onclick="openModal()">Cadastrar Novo Usuário</button>
+  </div>
+
+  <!-- Modal de Cadastro -->
+  <div id="register-modal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Cadastro de Usuário</h2>
+      <form id="register-form" onsubmit="register(event)">
+        <div class="form-group">
+          <label for="new-username">Novo Usuário:</label>
+          <input type="text" id="new-username" required>
+        </div>
+        <div class="form-group">
+          <label for="new-password">Nova Senha:</label>
+          <input type="password" id="new-password" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Cadastrar</button>
+        </div>
+        <div class="success-message" id="success-message"></div>
+      </form>
+    </div>
   </div>
 
   <script>
@@ -112,7 +156,7 @@
         localStorage.setItem('username', username);
 
         // Redireciona para a página principal após o login bem-sucedido
-        window.location.href = 'dashboard.html';
+        window.location.href = 'pagina_principal.html';
       } else {
         // Exibe uma mensagem de erro se o login falhar
         errorMessage.textContent = 'Usuário ou senha incorretos.';
@@ -145,8 +189,17 @@
         successMessage.textContent = 'Usuário cadastrado com sucesso: ' + JSON.stringify(newUser);
       }
     }
+
+    function openModal() {
+      var modal = document.getElementById('register-modal');
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      var modal = document.getElementById('register-modal');
+      modal.style.display = 'none';
+    }
   </script>
 </body>
 </html>
-
 
