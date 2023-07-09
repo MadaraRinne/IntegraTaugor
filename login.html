@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f1f1f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 300px;
+      margin: 0 auto;
+      margin-top: 100px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Login</h2>
+    <form id="login-form" onsubmit="login(event)">
+      <div class="form-group">
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Entrar</button>
+      </div>
+      <div class="error-message" id="error-message"></div>
+    </form>
+
+    <h2>Cadastro</h2>
+    <form id="register-form" onsubmit="register(event)">
+      <div class="form-group">
+        <label for="new-username">Novo Usuário:</label>
+        <input type="text" id="new-username" required>
+      </div>
+      <div class="form-group">
+        <label for="new-password">Nova Senha:</label>
+        <input type="password" id="new-password" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Cadastrar</button>
+      </div>
+      <div class="success-message" id="success-message"></div>
+    </form>
+  </div>
+
+  <script>
+    // Array para armazenar os usuários cadastrados
+    var users = [];
+
+    function login(event) {
+      event.preventDefault();
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      var errorMessage = document.getElementById('error-message');
+
+      // Verifica se as credenciais estão corretas
+      var user = users.find(function (user) {
+        return user.username === username && user.password === password;
+      });
+
+      if (user) {
+        // Armazena o nome de usuário no armazenamento local
+        localStorage.setItem('username', username);
+
+        // Redireciona para a página principal após o login bem-sucedido
+        window.location.href = 'index.html';
+      } else {
+        // Exibe uma mensagem de erro se o login falhar
+        errorMessage.textContent = 'Usuário ou senha incorretos.';
+      }
+    }
+
+    function register(event) {
+      event.preventDefault();
+      var newUsername = document.getElementById('new-username').value;
+      var newPassword = document.getElementById('new-password').value;
+      var successMessage = document.getElementById('success-message');
+
+      // Verifica se o usuário já está cadastrado
+      var existingUser = users.find(function (user) {
+        return user.username === newUsername;
+      });
+
+      if (existingUser) {
+        successMessage.textContent = 'Usuário já cadastrado.';
+      } else {
+        // Cria um novo usuário
+        var newUser = {
+          username: newUsername,
+          password: newPassword
+        };
+
+        // Adiciona o novo usuário ao array de usuários
+        users.push(newUser);
+
+        successMessage.textContent = 'Usuário cadastrado com sucesso: ' + JSON.stringify(newUser);
+      }
+    }
+  </script>
+</body>
+</html>
+
+
