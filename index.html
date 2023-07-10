@@ -5,7 +5,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f1f1f1;
+      background-color: #180c88;
       margin: 0;
       padding: 0;
     }
@@ -14,9 +14,10 @@
       width: 300px;
       margin: 0 auto;
       margin-top: 100px;
-      background-color: #fff;
-      border: 1px solid #ccc;
+      background-color: #5a8ef0;
+      border: 1px solid #000000;
       padding: 20px;
+      text-align: center;
     }
 
     h2 {
@@ -33,22 +34,30 @@
     }
 
     .form-group input {
-      width: 100%;
+      width: 80%;
       padding: 10px;
       font-size: 16px;
-      border: 1px solid #ccc;
+      border: 1px solid #000000;
       border-radius: 4px;
     }
 
     .form-group button {
-      width: 100%;
+      width: 80%;
       padding: 10px;
       font-size: 16px;
-      background-color: #4CAF50;
-      color: #fff;
+      background-color: #222fa3;
+      color: #ffffff;
       border: none;
       cursor: pointer;
       border-radius: 4px;
+    }
+
+    .form-group button.register-button {
+      background-color: #222fa3;
+    }
+
+    .form-group button.register-new-user-button {
+      background-color: #222fa3;
     }
 
     .error-message {
@@ -69,15 +78,15 @@
     }
 
     .modal-content {
-      background-color: #fefefe;
+      background-color: #5a8ef0;
       margin: 10% auto;
       padding: 20px;
-      border: 1px solid #888;
+      border: 1px solid #000000;
       width: 300px;
     }
 
     .close {
-      color: #888;
+      color: #000000;
       float: right;
       font-size: 28px;
       font-weight: bold;
@@ -89,6 +98,19 @@
       color: #000;
       text-decoration: none;
       cursor: pointer;
+    }
+    
+    .open-modal-button {
+      background-color: #222fa3;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 4px;
+      margin: 0 auto;
+      display: block;
+      width: 200px;
     }
   </style>
 </head>
@@ -111,7 +133,7 @@
     </form>
 
     <h2>Cadastro</h2>
-    <button onclick="openModal()">Cadastrar Novo Usuário</button>
+    <button class="open-modal-button" onclick="openModal()">Cadastrar Novo Usuário</button>
   </div>
 
   <!-- Modal de Cadastro -->
@@ -129,7 +151,7 @@
           <input type="password" id="new-password" required>
         </div>
         <div class="form-group">
-          <button type="submit">Cadastrar</button>
+          <button type="submit" class="register-button">Cadastrar</button>
         </div>
         <div class="success-message" id="success-message"></div>
       </form>
@@ -202,4 +224,3 @@
   </script>
 </body>
 </html>
-
